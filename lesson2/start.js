@@ -15,7 +15,7 @@ function boot() {
         } else if (path == "/count.html") {
             res.end("index.html було запитано " + queryCount + " разів");
         } else {
-            res.setHead(404);
+            res.writeHeader(404);
             res.end("404 Page not found!");
         }
     }
