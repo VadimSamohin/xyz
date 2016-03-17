@@ -2,19 +2,21 @@
 'use strict';
 var users = [];
 var validator = require('validator');
+var controller = require("../controllers/usersController");
 
 module.exports = {
-    listUsers: users,
+    _users: users,
     add: function (data) {
-        if (this.validity(data)) {
+        if (this._validate(data)) {
             var result = {"success": true};
-            var allUsers = users.length;
-            for (var i = 0; i < allUsers; i++) {
+            var totalUsers = users.length;
+            for (var i = 0; i < totalUsers; i++) {
                 if (users[i].nick === data.nick) {
                     users.splice(i, 1);
                     result.edit = true;
                 }
             }
+            //create new user
             var newUser = {
                 "nick": data["nick"],
                 "name": data["name"],
@@ -23,25 +25,17 @@ module.exports = {
                 "age": data["age"]
             };
 
-            this.listUsers.push(newUser);
+            this._users.push(newUser);
 
             return result;
         }
         return {"success": false}
 
     },
-    get: function () {
+    getList: function () {
         return this._users;
     },
-    validity: function (data) {
-        return (
-            data['nick'] !== undefined &&
-            data['name'] !== undefined &&
-            data['e-mail'] !== undefined &&
-            data['description'] !== undefined &&
-            data['age'] !== undefined &&
-            validator.isLength(data['nick'], 2, 255) &&
-            validator.isLength(data['name'], 2, 255))
-        )
+    _validate: function (data) {
+        return ((data['nick'] !== undefined) && (data['name'] !== undefined));
     }
 };
