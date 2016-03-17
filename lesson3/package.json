@@ -1,0 +1,27 @@
+{
+  "name": "lesson3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "querystring": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VadimSamohin/xyz.git"
+  },
+  "keywords": [
+    "node",
+    "javascript"
+  ],
+  "author": "Vadim Samohin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VadimSamohin/xyz/issues"
+  },
+  "homepage": "https://github.com/VadimSamohin/xyz#readme",
+  "description": ""
+}
