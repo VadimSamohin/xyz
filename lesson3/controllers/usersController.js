@@ -23,30 +23,24 @@ module.exports = {
         }, 500, next)
     },
     postUser: function (req, res, next) {
-        setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-        req.on('data', function (piece){
-            var saveOn = "";
-            saveOn+=querystring.parse(piece.toString());
-            exports.testStr = saveOn;
-        });}}
+        var body = '';
 
+        req.on('data', function (data) {
+            body += data;
+        });
 
+        req.on('end', function () {
 
-      /*  req.on('end', function () {
+            var post = querystring.parse(body);
 
-
-
-             get the POST data
-            var readyStr = query.parse(str);
-
-            if (users.newEntry(readyStr)['edit']) {
+            if (users.add(post)['edit']) {
                 res.statusCode = 200;
-                res.write('User data changed');
+                res.write('only changes');
                 next();
             }
-            else if (users.newEntry(readyStr)['succesful']) {
+            else if (users.add(post)['success']) {
                 res.statusCode = 200;
-                res.write('new user added');
+                res.write('new user has been added');
                 next();
             }
             else {
@@ -56,4 +50,6 @@ module.exports = {
             }
         });
     }
-};*/
+};
+
+

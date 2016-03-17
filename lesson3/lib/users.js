@@ -1,47 +1,50 @@
-var check = require('validator'),
-    fromUC = require('../controllers/usersController'),
-    tUser = fromUC.newUser;
 
-
+'use strict';
 var users = [];
+var validator = require('validator');
 
 module.exports = {
-    usersArr: users,
-    newEntry: function (tUser) {
-        if (this.fieldCheck(tUser)) {
-
-            var result = {"succesful": true};
-            for (var i = 0; i < tUser.length; i++) {
-                if (usersArr[i].nick === tUser.nick)
-                    usersArr.splice(i, 1);
+    _users: users,
+    add: function (data) {
+        if (this._validate(data)) {
+            var result = {"success": true};
+            var totalUsers = users.length;
+            for (var i = 0; i < totalUsers; i++) {
+                if (users[i].nick === data.nick) {
+                    users.splice(i, 1);
                     result.edit = true;
                 }
-            }else {
-
-            // setup a new user
+            }
             var newUser = {
-                "nick": tUser["nick"],
-                "name": tUser["name"],
-                "e-mail": tUser["e-mail"],
-                "description": tUser["description"],
-                "age": tUser["age"]
+                "nick": data["nick"],
+                "name": data["name"],
+                "e-mail": data["e-mail"],
+                "description": data["description"],
+                "age": data["age"]
             };
-            this.usersArr.push(newUser); //pushing new user to array of users
+
+            this._users.push(newUser);
+
             return result;
         }
-
-        return {"succesful": false}
+        return {"success": false}
 
     },
-    getList: function getList() {
-        return JSON.stringify(this.usersArr);
+    get: function () {
+        return this._users;
     },
-    fieldCheck: function (tUser) {
+    _validate: function (data) {
         return (
-
-            tUser['nick'] !== undefined &&
-            tUser['name'] !== undefined &&
-            tUser.isLength(tUser['nick'], 2, 18) && check.isLength(tUser['name'], 2, 30))
+            data['nick'] !== undefined &&
+            data['name'] !== undefined &&
+            data['e-mail'] !== undefined &&
+            data['description'] !== undefined &&
+            data['age'] !== undefined &&
+            validator.isLength(data['nick'], 2, 255) &&
+            validator.isLength(data['name'], 2, 255) &&
+            validator.isEmail(data['e-mail']) &&
+            validator.isLength(data['description'], 2, 255) &&
+            validator.isNumeric(data['age'])
+        )
     }
 };
-
