@@ -11,7 +11,7 @@ function requestHandler(request, response) {
         methodType = request.method.toLowerCase();
 
 
-
+//checkif could be done
 
 if(routes[methodType][parsedUrl.pathname]){
     routes[methodType][parsedUrl.pathname](request, response, function(err){
