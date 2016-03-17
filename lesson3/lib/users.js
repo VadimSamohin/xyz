@@ -1,13 +1,12 @@
 
 'use strict';
 var users = [];
-var validator = require('validator');
 var controller = require("../controllers/usersController");
 
 module.exports = {
     _users: users,
     add: function (data) {
-        if (this._validate(data)) {
+        if (this.valid(data)) {
             var result = {"success": true};
             var totalUsers = users.length;
             for (var i = 0; i < totalUsers; i++) {
@@ -35,7 +34,7 @@ module.exports = {
     getList: function () {
         return this._users;
     },
-    _validate: function (data) {
+    valid: function (data) {
         return ((data['nick'] !== undefined) && (data['name'] !== undefined));
     }
 };
