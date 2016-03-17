@@ -1,6 +1,6 @@
 var users = require("../lib/users"),
     url = require("url"),
-    getStr = require("../index");
+    querystring = require("querystring");
 
 module.exports = {
     getUser: function (req, res, next) {
@@ -10,7 +10,7 @@ module.exports = {
             res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
             try {
-                if (users.getList().length>0) {
+                if (users.getList.length>0) {
                     var answer = users.get();
                 } else {
                     var answer = 'users are not exist';
@@ -22,10 +22,14 @@ module.exports = {
             }
         }, 500, next)
     },
-    postUser: function () {
-        var loadStr = getStr.str;
-        if(loadStr.length>0) var testUser = JSON.parse(loadStr);
-            exports.newUser = testUser}}
+    postUser: function (req, res, next) {
+        setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        req.on('data', function (piece){
+            var saveOn = "";
+            saveOn+=querystring.parse(piece.toString());
+            exports.testStr = saveOn;
+        });}}
+
 
 
       /*  req.on('end', function () {

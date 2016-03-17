@@ -33,7 +33,7 @@ module.exports = {
         return {"succesful": false}
 
     },
-    getList: function get() {
+    getList: function getList() {
         return JSON.stringify(this.usersArr);
     },
     fieldCheck: function (tUser) {

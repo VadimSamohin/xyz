@@ -9,12 +9,7 @@ function requestHandler(request, response) {
 
     var parsedUrl = url.parse(request.url, true),
         methodType = request.method.toLowerCase();
-    request.on('data', function (piece){
-        var saveOn = "";
-        saveOn+=querystring.parse(piece.toString());
-        exports.str = saveOn;
-        console.log(saveOn)
-    })
+
 
 
 
