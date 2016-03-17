@@ -4,12 +4,12 @@ var users = [];
 var validator = require('validator');
 
 module.exports = {
-    _users: users,
+    listUsers: users,
     add: function (data) {
-        if (this._validate(data)) {
+        if (this.validity(data)) {
             var result = {"success": true};
-            var totalUsers = users.length;
-            for (var i = 0; i < totalUsers; i++) {
+            var allUsers = users.length;
+            for (var i = 0; i < allUsers; i++) {
                 if (users[i].nick === data.nick) {
                     users.splice(i, 1);
                     result.edit = true;
@@ -23,7 +23,7 @@ module.exports = {
                 "age": data["age"]
             };
 
-            this._users.push(newUser);
+            this.listUsers.push(newUser);
 
             return result;
         }
@@ -33,7 +33,7 @@ module.exports = {
     get: function () {
         return this._users;
     },
-    _validate: function (data) {
+    validity: function (data) {
         return (
             data['nick'] !== undefined &&
             data['name'] !== undefined &&
@@ -41,10 +41,7 @@ module.exports = {
             data['description'] !== undefined &&
             data['age'] !== undefined &&
             validator.isLength(data['nick'], 2, 255) &&
-            validator.isLength(data['name'], 2, 255) &&
-            validator.isEmail(data['e-mail']) &&
-            validator.isLength(data['description'], 2, 255) &&
-            validator.isNumeric(data['age'])
+            validator.isLength(data['name'], 2, 255))
         )
     }
 };
