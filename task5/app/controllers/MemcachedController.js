@@ -30,10 +30,10 @@ module.exports = {
 
 
     /*        Examples
-     * curl -v -X POST "http://127.0.0.1:8081/memcached" -d '{"key":"bar","value":"foo","expires":160}' -H "Content-Type: application/json"
+     * curl -v -X POST "http://127.0.0.1:8081/memcached" -d '{"key":"bar","value":"foo","expires":176}' -H "Content-Type: application/json"
      * curl -v -X GET "http://127.0.0.1:8081/memcached/bar"
      *
-     *curl -v -X PUT "http://127.0.0.1:8081/memcached/bar" -d '{"value":"Oscar","expires":260}' -H "Content-Type: application/json"
+     *curl -v -X PUT "http://127.0.0.1:8081/memcached/bar" -d '{"value":"reminder","expires":237}' -H "Content-Type: application/json"
      * curl -v -X GET "http://127.0.0.1:8081/memcached/bar"
      *
      * curl -v -X DELETE "http://127.0.0.1:8081/memcached/bar"
